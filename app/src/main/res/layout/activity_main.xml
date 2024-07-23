@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#000000"
+    tools:context=".MainActivity">
+
+    <!-- Search bar -->
+    <SearchView
+        android:id="@+id/searchView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:queryHint="Search for songs"
+        android:iconifiedByDefault="false"
+        android:padding="10dp"
+        android:background="@drawable/search_background"/>
+
+    <!-- ListView for displaying songs -->
+    <ListView
+        android:id="@+id/listViewSong"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/searchView"
+        android:divider="@android:color/transparent"
+        android:dividerHeight="10sp"
+        android:padding="10dp"/>
+
+</RelativeLayout>

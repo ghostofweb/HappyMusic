@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background"
+    android:orientation="vertical"
+    android:weightSum="10"
+    tools:context=".PlayerActivity">
+
+  <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="0dp"
+      tools:ignore="Suspicious0dp,UselessLeaf"
+      android:layout_weight="7"
+      android:gravity="center"
+      android:orientation="vertical">
+    <TextView
+        android:id="@+id/txtsname"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:ellipsize="marquee"
+        android:marqueeRepeatLimit="marquee_forever"
+        android:padding="10dp"
+        android:singleLine="true"
+        android:text="Song Name"
+        android:textColor="#fff"
+        android:textSize="22sp"
+        android:textStyle="italic"
+        android:textAlignment="center"
+        tools:ignore="HardcodedText" />
+
+    <ImageView
+        android:id="@+id/imgview"
+        android:layout_width="250dp"
+        android:layout_height="250dp"
+        android:layout_marginBottom="80dp"
+        android:src="@drawable/album_icon" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp">
+      <SeekBar
+          android:id="@+id/seekbar"
+          android:layout_centerInParent="true"
+          android:layout_alignParentBottom="true"
+          android:layout_margin="20dp"
+          android:layout_marginBottom="40dp"
+          android:layout_width="250dp"
+          android:layout_height="wrap_content" />
+      <TextView
+          android:id="@+id/txtsstart"
+          android:layout_toLeftOf="@+id/seekbar"
+          android:layout_centerInParent="true"
+          android:layout_alignParentLeft="false"
+          android:layout_marginLeft="10dp"
+          android:text="0:00"
+          android:textColor="#fff"
+          android:textSize="14sp"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content" />
+      <TextView
+          android:id="@+id/txtsstop"
+          android:layout_toEndOf="@+id/seekbar"
+          android:layout_centerInParent="true"
+          android:layout_alignParentEnd="false"
+          android:layout_marginEnd="10dp"
+          android:text="4:20"
+          android:textColor="#fff"
+          android:textSize="14sp"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content" />
+    </RelativeLayout>
+  </LinearLayout>
+
+  <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="0dp"
+      tools:ignore="Suspicious0dp,UselessLeaf"
+      android:layout_weight="3">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+      <Button
+          android:id="@+id/playbtn"
+          android:layout_width="70dp"
+          android:layout_height="70dp"
+          android:layout_centerHorizontal="true"
+          android:src="@drawable/baseline_play_arrow_24" />
+
+      <ImageView
+          android:id="@+id/btnnext"
+          android:layout_width="50dp"
+          android:layout_height="50dp"
+          android:layout_marginTop="15dp"
+          android:layout_toEndOf="@+id/playbtn"
+          android:src="@drawable/baseline_skip_next_24" />
+
+      <ImageView
+          android:id="@+id/btnprev"
+          android:layout_width="50dp"
+          android:layout_height="50dp"
+          android:layout_marginTop="15dp"
+          android:layout_marginEnd="-6dp"
+          android:layout_toStartOf="@+id/playbtn"
+          android:src="@drawable/baseline_skip_previous_24" />
+
+      <ImageView
+          android:id="@+id/btnff"
+          android:layout_width="40dp"
+          android:layout_height="40dp"
+          android:layout_marginTop="20dp"
+          android:layout_marginStart="20dp"
+          android:layout_toEndOf ="@+id/btnnext"
+          android:src="@drawable/baseline_fast_forward_24" />
+
+      <ImageView
+          android:id="@+id/btnfr"
+          android:layout_width="40dp"
+          android:layout_height="40dp"
+          android:layout_marginTop="20dp"
+          android:layout_marginEnd="20dp"
+          android:layout_toStartOf ="@+id/btnprev"
+          android:src="@drawable/baseline_fast_rewind_24" />
+
+      <ImageView
+          android:id="@+id/btnshuffle"
+          android:layout_width="40dp"
+          android:layout_height="40dp"
+          android:layout_alignEnd="@+id/btnff"
+          android:layout_marginTop="20dp"
+          android:layout_marginEnd="-51dp"
+          android:src="@drawable/baseline_shuffle_24"/>
+
+    </RelativeLayout>
+  </LinearLayout>
+</LinearLayout>
