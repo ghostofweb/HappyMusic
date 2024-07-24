@@ -1,7 +1,14 @@
 package com.example.musicplayer;
-
+import android.graphics.drawable.GradientDrawable;
+import androidx.palette.graphics.Palette;
+import androidx.annotation.Nullable;
+import androidx.palette.graphics.Palette;
 import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Color;
+import android.media.MediaMetadataRetriever;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
@@ -115,9 +122,6 @@ public class PlayerActivity extends AppCompatActivity {
             }
         });
 
-
-
-
         // Fast forward button click listener
         btnff.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -172,7 +176,7 @@ public class PlayerActivity extends AppCompatActivity {
         btnShuffle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                isShuffle = !isShuffle;
+                  isShuffle = !isShuffle;
                 if (isShuffle) {
                     btnShuffle.setBackgroundResource(R.drawable.baseline_shuffle_on_24); // Pressed icon
                     shuffledList = new ArrayList<>(mp3List);
@@ -196,6 +200,10 @@ public class PlayerActivity extends AppCompatActivity {
             seekBar.setMax(mediaPlayer.getDuration());
             txtsname.setText(getFileName(uri));
             txtsstop.setText(createTime(mediaPlayer.getDuration()));
+
+            // Set album art
+            setAlbumArt(uri, imageView);
+
             mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
                 @Override
                 public void onCompletion(MediaPlayer mp) {
@@ -206,6 +214,57 @@ public class PlayerActivity extends AppCompatActivity {
             Log.e("PlayerActivity", "Error initializing media player", e);
         }
     }
+
+    private void setAlbumArt(Uri uri, ImageView imageView) {
+        MediaMetadataRetriever retriever = new MediaMetadataRetriever();
+        try {
+            retriever.setDataSource(getApplicationContext(), uri);
+            byte[] art = retriever.getEmbeddedPicture();
+            if (art != null) {
+                Bitmap bitmap = BitmapFactory.decodeByteArray(art, 0, art.length);
+                imageView.setImageBitmap(bitmap);
+
+                // Extract multiple colors from album art
+                Palette.from(bitmap).generate(new Palette.PaletteAsyncListener() {
+                    @Override
+                    public void onGenerated(@Nullable Palette palette) {
+                        if (palette != null) {
+                            // Extract vibrant and muted colors
+                            int vibrantColor = palette.getVibrantColor(Color.parseColor("#1d1716"));
+                            int mutedColor = palette.getMutedColor(Color.parseColor("#1d1716"));
+
+                            // Create a gradient drawable
+                            GradientDrawable gradientDrawable = new GradientDrawable(
+                                    GradientDrawable.Orientation.TOP_BOTTOM,
+                                    new int[] { vibrantColor, mutedColor });
+                            gradientDrawable.setCornerRadius(0f);
+
+                            // Set the background to the gradient drawable
+                            getWindow().getDecorView().setBackground(gradientDrawable);
+                        }
+                    }
+                });
+            } else {
+                imageView.setImageResource(R.drawable.album_icon); // Default image if no art found
+                // Set default background color
+                getWindow().getDecorView().setBackgroundColor(Color.parseColor("#1d1716"));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            imageView.setImageResource(R.drawable.album_icon); // Default image if an error occurs
+            // Set default background color
+            getWindow().getDecorView().setBackgroundColor(Color.parseColor("#1d1716"));
+        } finally {
+            // Always release the retriever
+            try {
+                retriever.release();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+
 
     private String createTime(int duration) {
         int minutes = (duration / 1000) / 60;
@@ -237,4 +296,3 @@ public class PlayerActivity extends AppCompatActivity {
         super.onDestroy();
     }
 }
-

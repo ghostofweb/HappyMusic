@@ -32,6 +32,7 @@ android {
 }
 
 dependencies {
+    implementation("androidx.palette:palette:1.0.0")
     implementation("com.karumi:dexter:6.2.2")
     implementation(libs.appcompat)
     implementation(libs.material)
