@@ -19,14 +19,11 @@
         android:padding="10dp"
         android:background="@drawable/search_background"/>
 
-    <!-- ListView for displaying songs -->
     <ListView
         android:id="@+id/listViewSong"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/searchView"
-        android:divider="@android:color/transparent"
-        android:dividerHeight="10sp"
-        android:padding="10dp"/>
+        />
 
 </RelativeLayout>
